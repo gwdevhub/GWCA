@@ -3,6 +3,7 @@
 #include <GWCA/GameContainers/List.h>
 #include <GWCA/GameContainers/Array.h>
 #include <GWCA/Utilities/Export.h>
+#include <GWCA/GameContainers/GamePos.h>
 
 namespace GW {
     struct PathingMap;
@@ -50,8 +51,7 @@ namespace GW {
         /* +h00B4 */ float cameraX;
         /* +h00B8 */ float cameraY;
         /* +h00BC */ float cameraZ;
-        /* +h00C0 */ float posX;
-        /* +h00C4 */ float posY;
+        /* +h00C0 */ Vec2f playerPos; //position of the main player agent
         /* +h00C8 */ uint32_t h00C8[26];
         /* +h0130 */ void* zones;
         //... Player coords and shit beyond this point if they are desirable :p
