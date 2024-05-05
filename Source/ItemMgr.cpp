@@ -146,14 +146,16 @@ namespace {
         GWCA_ASSERT(message_id == UI::UIMessage::kSendMoveItem && wparam);
         MoveItem_UIMessage* packet = (MoveItem_UIMessage*)wparam;
         const auto bag = Items::GetBag(packet->bag_id);
-        GWCA_ASSERT(bag);
+        uint32_t bag_index = bag ? bag->index : (static_cast<uint32_t>(packet->bag_id) - 1);
+
         // Make sure the user is allowed to move the item by the game
+        // edge case: bag can be null if moving an item to an empty bag slot
         if (!status->blocked && !CanAccessXunlaiChest()) {
-            if (IsStorageItem(Items::GetItemById(packet->item_id)) || IsStorageBag(bag))
+            if (IsStorageItem(Items::GetItemById(packet->item_id)) || (bag && IsStorageBag(bag)))
                 status->blocked = true;
         }
         if (!status->blocked) {
-            MoveItem_Ret(packet->item_id, packet->quantity, bag->index, packet->slot);
+            MoveItem_Ret(packet->item_id, packet->quantity, bag_index, packet->slot);
         }
     }
 
