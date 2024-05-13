@@ -126,14 +126,16 @@ namespace GW {
         /* +h0034 */ MerchItemArray merch_items2;
         /* +h0044 */ Array<uint32_t> accum_map_initData;
         /* +h0050 */ Size2D accum_map_init_dims;
-        /* +h0058 */ uint32_t accum_map_init_offset;
+        /* +h0058 */ uint32_t accum_map_init_offset; // This offset is used to offset the data from accum_map_initData when setting up the cartographed_areas
         /* +h005C */ uint32_t h005C[8];
         /* +h007C */ MapAgentArray map_agents;
         /* +h008C */ Array<PartyAlly> party_allies; // List of allies added to the current party
         /* +h009C */ Vec3f all_flag;
         /* +h00A8 */ uint32_t h00A8;
         /* +h00AC */ PartyAttributeArray attributes;
-        /* +h00BC */ uint32_t h00BC[255];
+        /* +h00BC */ uint32_t h00BC[92];
+        /* +h0230 */ Array<void*>  h0230; // Some array being manipulated by carto-related StoC
+        /* +h0240 */ uint32_t h0240[158];
         /* +h04B8 */ Array<void *> h04B8;
         /* +h04C8 */ Array<void *> h04C8;
         /* +h04D8 */ uint32_t h04D8;
