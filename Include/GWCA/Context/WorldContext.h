@@ -2,6 +2,7 @@
 
 #include <GWCA/GameContainers/Array.h>
 #include <GWCA/GameContainers/GamePos.h>
+#include <GWCA/GameContainers/Size2D.h>
 #include <GWCA/Utilities/Export.h>
 
 namespace GW {
@@ -203,19 +204,18 @@ namespace GW {
         /* +h0014 */ Array<wchar_t> dialog_buff;
         /* +h0024 */ MerchItemArray merch_items;
         /* +h0034 */ MerchItemArray merch_items2;
-        /* +h0044 */ uint32_t accumMapInitUnk0;
-        /* +h0048 */ uint32_t accumMapInitUnk1;
-        /* +h004C */ uint32_t accumMapInitOffset;
-        /* +h0050 */ uint32_t accumMapInitLength;
-        /* +h0054 */ uint32_t h0054;
-        /* +h0058 */ uint32_t accumMapInitUnk2;
+        /* +h0044 */ Array<uint32_t> accum_map_initData;
+        /* +h0050 */ Size2D accum_map_init_dims;
+        /* +h0058 */ uint32_t accum_map_init_offset; // This offset is used to offset the data from accum_map_initData when setting up the cartographed_areas
         /* +h005C */ uint32_t h005C[8];
         /* +h007C */ MapAgentArray map_agents;
         /* +h008C */ Array<PartyAlly> party_allies; // List of allies added to the current party
         /* +h009C */ Vec3f all_flag;
         /* +h00A8 */ uint32_t h00A8;
         /* +h00AC */ PartyAttributeArray attributes;
-        /* +h00BC */ uint32_t h00BC[255];
+        /* +h00BC */ uint32_t h00BC[92];
+        /* +h0230 */ Array<void*>  h0230; // Some array being manipulated by carto-related StoC
+        /* +h0240 */ uint32_t h0240[158];
         /* +h04B8 */ Array<void *> h04B8;
         /* +h04C8 */ Array<void *> h04C8;
         /* +h04D8 */ uint32_t h04D8;
@@ -230,8 +230,8 @@ namespace GW {
         /* +h0574 */ Array<uint32_t> henchmen_agent_ids;
         /* +h0584 */ HeroFlagArray hero_flags;
         /* +h0594 */ HeroInfoArray hero_info;
-        /* +h05A4 */ Array<void *> cartographed_areas; // Struct size = 0x20
-        /* +h05B4 */ uint32_t h05B4[2];
+        /* +h05A4 */ Array<uint32_t> cartographed_areas; // 1D array that's spliced based on cartographed_map_dims. Each bit in an int represents a flag for discovered/undiscovered
+        /* +h05B4 */ Size2D cartographed_map_dims; // width and height of the world map fog overlay
         /* +h05BC */ Array<ControlledMinions> controlled_minion_count;
         /* +h05CC */ Array<uint32_t> missions_completed;
         /* +h05DC */ Array<uint32_t> missions_bonus;
